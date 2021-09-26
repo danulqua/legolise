@@ -9,7 +9,8 @@ A social network for average LEGO enjoyers where people can share their creation
 - Like, comment, add to "Build later" list
 - Move from "Build later" list to "Built" (building's owner will get a notification that his creation has been built)
 - Friend list and chat
-  May be expanded.
+
+May be expanded.
 
 ## Tech Stack
 
