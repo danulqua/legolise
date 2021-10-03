@@ -1,1 +1,7 @@
-require('dotenv').config();
+require("dotenv").config();
+
+const helloWorld = (string) => {
+  console.log(string);
+};
+
+helloWorld("hi");
