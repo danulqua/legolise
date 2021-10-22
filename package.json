@@ -1,0 +1,47 @@
+{
+  "name": "legolise",
+  "version": "1.0.0",
+  "description": "A social network for average LEGO enjoyers where people can share their creations as well as rate other people's buildings.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "back-lint": "cd server && npm run lint",
+    "front-lint": "cd client && npm run lint",
+    "front-format": "cd client && npm run format",
+    "back-format": "cd server && npm run format"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "client/**/*.{ts,tsx}": [
+      "npm run front-lint",
+      "npm run front-format",
+      "git add"
+    ],
+    "server/**/*.{ts,tsx}": [
+      "npm run back-lint",
+      "npm run back-format",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danil0110/legolise.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danil0110/legolise/issues"
+  },
+  "homepage": "https://github.com/danil0110/legolise#readme"
+}
