@@ -13,25 +13,8 @@
     "back-lint": "cd server && npm run lint",
     "front-lint": "cd client && npm run lint",
     "front-format": "cd client && npm run format",
-    "back-format": "cd server && npm run format"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "client/**/*.{ts,tsx}": [
-      "npm run front-lint",
-      "npm run front-format",
-      "git add"
-    ],
-    "server/**/*.{ts,tsx}": [
-      "npm run back-lint",
-      "npm run back-format",
-      "git add"
-    ]
+    "back-format": "cd server && npm run format",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,7 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npm run front-lint "--max-warnings 0"
+npm run front-format
+npm run back-lint
+npm run back-format
