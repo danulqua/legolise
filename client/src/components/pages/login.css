@@ -1,58 +1,57 @@
-.container-login-page{
-    text-align: center;
-    padding-top: 70px;
-    width: 60%;
-    background-color: #ffb3b3;
-    border-radius: 6px;
-    border: 1px solid black;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: 100px auto 70px;
-    padding-bottom: 100px;
+.container-login-page {
+  text-align: center;
+  padding-top: 70px;
+  width: 60%;
+  background-color: #ffb3b3;
+  border-radius: 6px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 100px auto 70px;
+  padding-bottom: 100px;
 }
 
-
 .login-inputs {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .login-inputs input {
-    width: 80%;
-    padding: 25px;
-    margin-top: 40px;
-    border: 1px solid darkgrey;
-    border-radius: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
+  width: 80%;
+  padding: 25px;
+  margin-top: 40px;
+  border: 1px solid darkgrey;
+  border-radius: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .login-inputs a {
-    font-size: 15px;
-    color: #1E90FF;
+  font-size: 15px;
+  color: #1e90ff;
 }
 
 .no-acc a {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .login-inputs button {
-    margin-top: 20px;
-    margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .no-acc {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .login-inputs form {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

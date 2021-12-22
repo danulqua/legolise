@@ -1,13 +1,13 @@
 form#add-post {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .post-input-block {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 form#add-post select,
-form#add-post input[type=tel],
-form#add-post input[type=number] {
-    width: 180px;
+form#add-post input[type='tel'],
+form#add-post input[type='number'] {
+  width: 180px;
 }

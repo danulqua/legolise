@@ -1,34 +1,34 @@
 form#search-posts {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .search-input-block {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .search-filters {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .filter-block {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .form-radio {
-    display: flex;
+  display: flex;
 }
 
 .form-radio {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .price-block {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
