@@ -1,0 +1,19 @@
+.email-input, .password-input, .date-of-birth-input {
+    width: 100%;
+    overflow: visible;
+    border: 1px solid grey;
+    padding: 5px 10px;
+    border-radius: 5px;
+
+}
+
+.sign-up-menu {
+    margin: 50px;
+    border: 3px solid darkgrey;
+    border-radius: 10px;
+    padding: 50px;
+}
+
+.title {
+    margin-top: 25px;
+}

@@ -1,0 +1,24 @@
+.post-card-details .like-post {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: grey;
+    border-radius: 5px;
+    width: 35px;
+    height: 35px;
+    transition: .3s background-color ease;
+}
+
+.like-post i {
+    font-size: 16px;
+    color: grey;
+    transition: .3s color ease;
+}
+
+.post-card-details .like-post.liked {
+    background-color: rgb(255, 97, 97);
+}
+
+.like-post.liked i {
+    color: white;
+}

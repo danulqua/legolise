@@ -1,0 +1,22 @@
+.spinner-wrapper {
+    margin: auto;
+}
+
+.spinner {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    border: 10px solid rgba(255, 209, 91, .3);
+    border-top-color: rgb(255, 209, 91);
+    border-radius: 50%;
+    animation: spinner 1s infinite linear;
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
