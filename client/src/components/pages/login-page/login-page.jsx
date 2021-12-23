@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
-import AuthService from '../../services/auth-service';
-import './login.css';
+import AuthService from '../../../services/auth-service';
+import './login-page.scss';
 
 const Login = (props) => {
   const [email, setEmail] = useState('');

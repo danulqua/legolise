@@ -28,8 +28,52 @@
   margin-bottom: 15px;
 }
 
-.profile-container {
-  margin-top: 5%;
+.profile-wrapper {
+  margin-top: 60px;
+
+  .short-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+
+    .avatar-wrapper {
+      width: 150px;
+      height: 150px;
+      overflow: hidden;
+      border-radius: 50%;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .user-name {
+      font-size: 18px;
+
+      span {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .detail-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, minmax(100px, auto));
+
+    &__item:nth-child(1) {
+      grid-column: 1 / 3;
+    }
+
+    &__item {
+      h2 {
+        font-size: 20px;
+      }
+    }
+  }
 }
 
 .profile-row-container {

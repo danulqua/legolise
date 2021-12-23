@@ -1,7 +1,7 @@
 import React from 'react';
-import './feed-page.css';
-import SearchForm from '../search-form';
-import PostList from '../post-list';
+import './feed-page.scss';
+import SearchForm from '../../search-form';
+import PostList from '../../post-list';
 
 const FeedPage = () => {
   return (

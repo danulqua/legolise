@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './profile-edit-page.css';
+import './profile-edit-page.scss';
 
 export default class EditProfile extends Component {
   constructor(props) {

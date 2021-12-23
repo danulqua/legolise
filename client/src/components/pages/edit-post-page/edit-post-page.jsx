@@ -1,5 +1,5 @@
 import React from 'react';
-import EditPostForm from '../post-edit-page';
+import EditPostForm from '../../post-edit-page';
 
 const EditPost = (props) => {
   return (

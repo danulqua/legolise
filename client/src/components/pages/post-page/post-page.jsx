@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import Service from '../../services/post-service';
+import Service from '../../../services/post-service';
 
-import PostDetails from '../post-details';
-import Spinner from '../spinner';
+import PostDetails from '../../post-details';
+import Spinner from '../../spinner';
 
 const PostPage = (props) => {
   const [state, setState] = useState({

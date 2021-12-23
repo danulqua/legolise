@@ -1,6 +1,6 @@
 import React from 'react';
-import './new-post-page.css';
-import AddPostForm from '../add-post-form';
+import './new-post-page.scss';
+import AddPostForm from '../../add-post-form';
 
 const NewPostPage = (props) => {
   return (

@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import AuthService from '../../services/auth-service';
-import './sign-up-menu.css';
+import AuthService from '../../../services/auth-service';
+import './sign-up-menu.scss';
 
 const SignUpMenu = (props) => {
   const [state, setState] = useState({
