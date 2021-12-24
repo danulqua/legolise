@@ -1,113 +1,48 @@
 /* eslint-disable require-jsdoc */
-class PostAccess {
-  constructor(db) {
-    this.db = db;
-  }
 
-  async getAllPosts() {
-    const result = await this.db.query(
-      `SELECT * FROM posts ORDER BY "date" DESC`
-    );
+const Posts = require("../models/Posts");
+
+const postInterface = () => {
+  const getAllPosts = async () => {
+    const result = await Posts.find({}).exec();
     return result;
-  }
+  };
 
-  async getPostById(id) {
-    const result = await this.db.query(
-      `SELECT * FROM posts WHERE "postId" = $1`,
-      [id]
-    );
+  const getPostById = async (id) => {
+    const result = await Posts.find({ _id: `${id}` }).exec();
     return result;
-  }
+  };
 
-  async addPost(postId, body) {
-    const {
-      type,
-      title,
-      description,
-      district,
-      address,
-      ownerPhone,
-      price,
-      originLink,
-    } = body;
-
-    const result = await this.db.query(
-      `
-                INSERT INTO posts ("postId", "type", "title", "description", "originLink", "district", "address", "ownerPhone", "price")
-                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-                RETURNING *
-            `,
-      [
-        postId,
-        type,
-        title,
-        description,
-        originLink,
-        district,
-        address,
-        ownerPhone,
-        price,
-      ]
-    );
-
+  const addPost = async (postId, body) => {
+    const result = await Posts.create(body);
     return result;
-  }
+  };
 
-  async editPost(body) {
-    const {
-      postId,
-      type,
-      title,
-      description,
-      district,
-      address,
-      ownerPhone,
-      price,
-      originLink,
-    } = body;
-
-    const result = await this.db.query(
-      `
-                UPDATE posts SET
-                "type" = $1,
-                "title" = $2,
-                "description" = $3,
-                "district" = $4,
-                "address" = $5,
-                "ownerPhone" = $6,
-                "price" = $7,
-                "originLink" = $8
-                WHERE "postId" = $9
-                RETURNING *
-            `,
-      [
-        type,
-        title,
-        description,
-        district,
-        address,
-        ownerPhone,
-        price,
-        originLink,
-        postId,
-      ]
-    );
-
+  const editPost = async (body) => {
+    const { postId, title, description, pictures, likes } = body;
+    const post = await Posts.findOne({ _id: postId });
+    const update = {
+      title: title,
+      description: description,
+      pictures: pictures,
+      likes: likes,
+    };
+    const result = post.updateOne(update);
     return result;
-  }
+  };
 
-  async deletePost(id) {
-    const result = await this.db.query(
-      `
-                DELETE FROM posts
-                WHERE "postId" = $1
-                RETURNING *
-            `,
-      [id]
-    );
-
+  const deletePost = async (id) => {
+    const result = await Posts.deleteOne({ _id: id });
     return result;
-  }
-}
+  };
 
-module.exports = PostAccess;
+  return {
+    getAllPosts,
+    getPostById,
+    addPost,
+    editPost,
+    deletePost,
+  };
+};
+
+module.exports = postInterface;

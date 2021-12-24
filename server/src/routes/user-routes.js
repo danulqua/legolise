@@ -1,9 +1,9 @@
 /* eslint-disable require-jsdoc */
-const UserAccess = require("../data-access/user-queries");
+const userInterface = require("../data-access/user-queries");
 
 async function routes(fastify, options) {
-  const { authHook } = require("../services/auth-service")(fastify.db);
-  const userAccess = new UserAccess(fastify.db);
+  const { authHook } = require("../services/auth-service")(fastify);
+  const userAccess = userInterface(fastify);
 
   fastify.get(
     "/:username",
@@ -12,7 +12,7 @@ async function routes(fastify, options) {
       const result = await userAccess.getUserByUsername(
         request.params.username
       );
-      reply.send(result);
+      reply.send(result["_doc"]);
     }
   );
 

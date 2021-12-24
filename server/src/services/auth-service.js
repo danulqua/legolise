@@ -1,16 +1,11 @@
 const bcrypt = require("bcryptjs");
+const Users = require("../models/Users");
 
-const authService = (db) => {
+const authService = (fastify) => {
   const register = async (body) => {
-    const candidate = await db.query(
-      `
-                SELECT * FROM users
-                WHERE "email" = $1
-            `,
-      [body.email]
-    );
+    const candidate = await Users.find({ email: `${body.email}` }).exec();
 
-    if (candidate.rows.length) {
+    if (candidate.length) {
       return {
         error: true,
         message: "User with this email already exists",
@@ -18,54 +13,30 @@ const authService = (db) => {
     }
 
     const newUser = {
+      bio: body.bio,
       username: body.username,
       email: body.email,
       password: await bcrypt.hash(body.password, 10),
       gender: body.gender,
       dateOfBirth: body.dateOfBirth,
+      createdOn: body.createdOn,
     };
 
-    const result = await db.query(
-      `
-                INSERT INTO users (
-                    "username",
-                    "email",
-                    "password",
-                    "gender",
-                    "dateOfBirth"
-                )
-                VALUES ($1, $2, $3, $4, $5)
-                RETURNING *
-            `,
-      [
-        newUser.username,
-        newUser.email,
-        newUser.password,
-        newUser.gender,
-        newUser.dateOfBirth,
-      ]
-    );
-
-    return result.rows[0];
+    const result = await Users.create(newUser);
+    return result;
   };
 
   const login = async (body, reply) => {
-    const candidate = await db.query(
-      `
-                SELECT * FROM users
-                WHERE "email" = $1
-            `,
-      [body.email]
-    );
+    const candidate = await Users.find({ email: `${body.email}` }).exec();
 
-    if (!candidate.rows.length) {
+    if (!candidate.length) {
       return {
         error: true,
         message: "Incorrect credentials",
       };
     }
 
-    const user = candidate.rows[0];
+    const user = candidate[0];
 
     if (!(await bcrypt.compare(body.password, user.password))) {
       return {
@@ -74,8 +45,8 @@ const authService = (db) => {
       };
     }
 
-    const token = jwt.sign(
-      { userId: user.userId },
+    const token = fastify.jwt.sign(
+      { id: user._id },
       process.env.JWT_ACCESS_SECRET
     );
     reply.setCookie("jwt", token, {
@@ -107,7 +78,7 @@ const authService = (db) => {
       });
     }
 
-    const claims = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+    const claims = fastify.jwt.verify(token, process.env.JWT_ACCESS_SECRET);
     if (!claims) {
       request.userId = null;
       reply.send({

@@ -1,37 +1,38 @@
 /* eslint-disable require-jsdoc */
-class UserAccess {
-  constructor(db) {
-    this.db = db;
-  }
 
-  async getUsers() {
-    const result = await this.db.query("SELECT * FROM users");
+const Users = require("../models/Users");
 
-    if (!result.rows.length) {
+const userInterface = () => {
+  const getUsers = async () => {
+    const result = await Users.find({}).exec();
+
+    if (!result.length) {
       return {
         error: true,
         message: "Users are missing",
       };
     }
 
-    return result.rows;
-  }
-  async getUserByUsername(username) {
-    const result = await this.db.query(
-      'SELECT * FROM users WHERE "username" = $1',
-      [username]
-    );
+    return result;
+  };
+  const getUserByUsername = async (username) => {
+    const result = await Users.find({ username: `${username}` }).exec();
 
-    if (!result.rows[0]) {
+    if (!result[0]) {
       return {
         error: true,
         message: "User not found",
       };
     }
 
-    const { ...data } = result.rows[0];
+    const { ...data } = result[0];
     return data;
-  }
-}
+  };
 
-module.exports = UserAccess;
+  return {
+    getUsers,
+    getUserByUsername,
+  };
+};
+
+module.exports = userInterface;

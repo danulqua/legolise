@@ -1,6 +1,7 @@
 /* eslint-disable require-jsdoc */
+
 const authRoutes = async (fastify) => {
-  const authService = require("../services/auth-service")(fastify.pg);
+  const authService = require("../services/auth-service")(fastify);
 
   fastify.post("/register", async (request, reply) => {
     const result = await authService.register(request.body);

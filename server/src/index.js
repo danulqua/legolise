@@ -1,14 +1,16 @@
 const fastify = require("fastify")({ logger: true });
-const pg = require("fastify-postgres");
+require("dotenv").config();
+const mongoose = require("mongoose");
 
-const dbConnection = require("./plugins/db");
 const authRoutes = require("./routes/auth-routes");
-// const postRoutes = require("./routes/post-routes");
-// const userRoutes = require("./routes/user-routes");
+const postRoutes = require("./routes/post-routes");
+const userRoutes = require("./routes/user-routes");
 
-fastify.register(pg, {
-  connectionString: dbConnection(),
-});
+try {
+  mongoose.connect(`${process.env.MONGODB_URI}`);
+} catch (e) {
+  console.error(e);
+}
 fastify.register(require("fastify-cookie"));
 fastify.register(require("fastify-cors"), {
   credentials: true,
@@ -18,9 +20,9 @@ fastify.register(require("fastify-jwt"), {
   secret: "secret",
 });
 
-// fastify.register(postRoutes, { prefix: "/api/posts" });
+fastify.register(postRoutes, { prefix: "/api/posts" });
 fastify.register(authRoutes, { prefix: "/api/auth" });
-// fastify.register(userRoutes, { prefix: "/api/users" });
+fastify.register(userRoutes, { prefix: "/api/users" });
 
 const PORT = process.env.PORT || 4000;
 
