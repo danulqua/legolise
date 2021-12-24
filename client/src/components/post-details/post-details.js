@@ -31,34 +31,34 @@ const flatView = (props) => {
         <div className='details'>
           <div className='title'>{title}</div>
           <div className='type'>
-            <h4>Тип оголошення</h4>
-            <span>Пошук співмешканця</span>
+            <h4>type of post</h4>
+            <span>search for liver</span>
           </div>
           <div className='description'>
-            <h4>Опис</h4>
+            <h4>Description</h4>
             <span>{description}</span>
           </div>
           <div className='district'>
-            <h4>Район</h4>
+            <h4>disctrict</h4>
             <span>{district}</span>
           </div>
           <div className='address'>
-            <h4>Адреса</h4>
+            <h4>address</h4>
             <span>{address}</span>
           </div>
           <div className='phone-number'>
-            <h4>Номер телефону власника квартири</h4>
+            <h4>tel number</h4>
             <span>{ownerPhone}</span>
           </div>
           <div className='price'>
-            <h4>Ціна</h4>
+            <h4>price</h4>
             <span>{price} &#8372;</span>
           </div>
           {(() => {
             if (originLink) {
               return (
                 <div className='originLink'>
-                  <h4>Оригінальне оголошення</h4>
+                  <h4>original link</h4>
                   <a href={originLink} target='_blank' rel='noreferrer'>
                     {originLink}
                   </a>
@@ -92,11 +92,11 @@ const groupView = (props) => {
         <div className='details'>
           <div className='title'>{title}</div>
           <div className='type'>
-            <h4>Тип оголошення</h4>
-            <span>Пошук групи</span>
+            <h4>type of post</h4>
+            <span>search group</span>
           </div>
           <div className='description'>
-            <h4>Опис</h4>
+            <h4>Description</h4>
             <span>{description}</span>
           </div>
         </div>
@@ -116,10 +116,10 @@ export default class PostDetails extends Component {
     return (
       <div className='post-details-container'>
         <div className='post-page-header'>
-          <h1>Повна інформація</h1>
+          <h1>full info</h1>
           <div className='btns-page'>
             <Link to={postId + '/edit'}>
-              <Button className='btn btn-primary'>Редагувати пост</Button>
+              <Button className='btn btn-primary'>redact</Button>
             </Link>
             <BtnLike liked={liked} onLike={onLike} />
           </div>
