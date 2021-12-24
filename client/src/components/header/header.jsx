@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import './header.scss';
 import { Container } from 'reactstrap';
 
-const Header = (props) => {
-  const links = props.authUser ? (
+const Header = ({ authUser }) => {
+  const links = authUser ? (
     <li className='nav-item'>
       <Link to='/login'>Sign in</Link>
     </li>
