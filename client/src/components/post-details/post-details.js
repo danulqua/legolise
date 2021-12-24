@@ -76,6 +76,8 @@ const flatView = (props) => {
 const groupView = (props) => {
   const { title, description, date } = props;
 
+  console.log(date);
+
   return (
     <div>
       <div className='post-details-info'>
@@ -86,7 +88,6 @@ const groupView = (props) => {
             </div>
             <span>John Week</span>
           </div>
-          <div>{formatDate(date)}</div>
         </div>
         <hr></hr>
         <div className='details'>

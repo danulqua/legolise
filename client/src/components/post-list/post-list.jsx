@@ -1,45 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Row } from 'reactstrap';
 import PostCard from '../post-card/post-card.jsx';
 import Spinner from '../spinner/spinner.jsx';
 
 import Service from '../../services/post-service';
 
-export default class PostList extends Component {
-  constructor(props) {
-    super(props);
-    this.service = new Service();
-    this.state = {
-      posts: [],
-      loading: true,
-      error: false
-    };
+const PostList = () => {
+  const service = new Service();
+  const [state, setState] = useState({
+    posts: [],
+    loading: true,
+    error: false
+  });
 
-    this.onLike = this.onLike.bind(this);
-  }
-
-  componentDidMount() {
-    this.service.getAllPosts().then((res) => {
+  useEffect(() => {
+    service.getAllPosts().then((res) => {
       if (!res.error) {
-        return this.setState({
+        return setState((state) => ({
+          ...state,
           posts: res.map((item) => {
-            const newItem = { ...item, liked: false };
-            return newItem;
+            return item;
           }),
           loading: false
-        });
+        }));
       } else {
-        this.setState({
+        setState((state) => ({
+          ...state,
           error: true,
           loading: false,
-          errorMessage: 'Оголошення відсутні'
-        });
+          errorMessage: 'No posts found'
+        }));
       }
     });
-  }
+  }, []);
 
-  onLike(id) {
-    this.setState(({ posts }) => {
+  const onLike = (id) => {
+    setState(({ posts }) => {
       const clonedPosts = [...posts];
       const idx = clonedPosts.findIndex((item) => item.postId === id);
       const newPost = { ...clonedPosts[idx], liked: !clonedPosts[idx].liked };
@@ -48,35 +44,34 @@ export default class PostList extends Component {
         posts: clonedPosts
       };
     });
-  }
+  };
 
-  render() {
-    const content = this.state.loading ? (
-      <Spinner />
-    ) : (
-      this.state.posts.map((post) => {
-        const { postId, type, title, price, district, img, liked } = post;
-        return (
-          <PostCard
-            key={postId}
-            id={postId}
-            type={type}
-            title={title}
-            price={price}
-            district={district}
-            img={img}
-            liked={liked}
-            onLike={() => this.onLike(postId)}
-          />
-        );
-      })
-    );
-    return (
-      <div className='feed-posts-block'>
-        <ul className='post-list'>
-          <Row>{content}</Row>
-        </ul>
-      </div>
-    );
-  }
-}
+  const content = state.loading ? (
+    <Spinner />
+  ) : (
+    state.posts.map((post) => {
+      console.log(post);
+      const { _id, title, pictures, liked, createdOn } = post;
+      return (
+        <PostCard
+          key={_id}
+          id={_id}
+          title={title}
+          img={pictures[0]}
+          liked={liked}
+          date={createdOn}
+          onLike={() => onLike(_id)}
+        />
+      );
+    })
+  );
+  return (
+    <div className='feed-posts-block'>
+      <ul className='post-list'>
+        <Row>{content}</Row>
+      </ul>
+    </div>
+  );
+};
+
+export default PostList;

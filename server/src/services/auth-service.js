@@ -56,6 +56,7 @@ const authService = (fastify) => {
     });
 
     return {
+      token,
       message: "Logged in successfully",
     };
   };

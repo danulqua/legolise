@@ -3,6 +3,7 @@ import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthService from '../../../services/auth-service';
 import './login-page.scss';
+import LocalStorageService from '../../../helpers/storageService';
 
 const Login = (props) => {
   const [email, setEmail] = useState('');
@@ -29,6 +30,8 @@ const Login = (props) => {
       if (!data.error) {
         props.loginUser(data);
         console.log(data);
+        const storage = LocalStorageService;
+        storage.setToken(data.token);
         return props.history.push('/');
       }
       console.log('error occured');

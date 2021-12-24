@@ -28,7 +28,7 @@ const PostPage = (props) => {
         }));
       }
     });
-  });
+  }, []);
 
   if (state.loading) {
     return (

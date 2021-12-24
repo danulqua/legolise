@@ -9,7 +9,7 @@ const formatDate = (timestamp) => {
     hour12: false
   };
 
-  return new Intl.DateTimeFormat('uk-UA', options).format(date);
+  return new Intl.DateTimeFormat('en-US', options).format(date);
 };
 
 export { formatDate };

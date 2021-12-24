@@ -5,7 +5,7 @@ import './header.scss';
 import { Container } from 'reactstrap';
 
 const Header = ({ authUser }) => {
-  const links = authUser ? (
+  const links = !authUser ? (
     <li className='nav-item'>
       <Link to='/login'>Sign in</Link>
     </li>

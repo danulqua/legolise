@@ -9,6 +9,7 @@ const SignUpMenu = (props) => {
     username: '',
     gender: 'f',
     email: '',
+    bio: '',
     dateOfBirth: '',
     password: ''
   });
@@ -25,8 +26,9 @@ const SignUpMenu = (props) => {
 
   const onRegister = (e) => {
     e.preventDefault();
-    console.log(state);
-    authService.register(state).then((data) => {
+    const body = { ...state };
+    body.createdOn = new Date();
+    authService.register(body).then((data) => {
       if (!data.error) {
         return props.history.push('/login');
       }
@@ -53,8 +55,19 @@ const SignUpMenu = (props) => {
               required
             ></input>
           </div>
+          <div className='username-input post-input-block'>
+            <h4>Your bio</h4>
+            <input
+              name='bio'
+              placeholder='Something about your bio'
+              type='text'
+              value={state.bio}
+              onChange={handlerInput}
+              required
+            ></input>
+          </div>
           <div className='choose-gender post-input-block'>
-            <h4>Your sex</h4>
+            <h4>Your gender</h4>
             <div className='form-radio'>
               <input
                 type='radio'
