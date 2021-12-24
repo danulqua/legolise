@@ -50,13 +50,20 @@ ol {
 }
 
 input[type='text'],
+input[type='email'],
+input[type='password'],
 input[type='number'],
 input[type='tel'],
+input[type='date'],
 select {
   border: 1px solid grey;
   border-radius: 5px;
   padding: 5px 10px;
   width: 100%;
+}
+
+input[type='date'] {
+  width: initial;
 }
 
 select {

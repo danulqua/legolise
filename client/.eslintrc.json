@@ -23,6 +23,7 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
+    "react/prop-types": "off",
     "require-jsdoc": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/ban-types": "off",

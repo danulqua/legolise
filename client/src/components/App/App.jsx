@@ -11,7 +11,7 @@ import {
   NewPostPage,
   Login,
   SignUpMenu,
-  EditProfile,
+  ProfileEditPage,
   EditPost
 } from '../pages';
 
@@ -49,7 +49,16 @@ const App = () => {
             <Route exact path='/posts/:id' component={PostPage} />
             <Route exact path='/profile' component={ProfilePage} />
             <Route exact path='/register' component={SignUpMenu} />
-            <Route exact path='/editProfile' component={EditProfile} />
+            {/* <Route exact path='/editProfile' component={ProfileEditPage} /> */}
+            <Route exact path='/editProfile'>
+              <ProfileEditPage
+                username='vasil4242'
+                email='vasil@gmail.com'
+                bio='I love lego'
+                gender='male'
+                dateOfBirth='10.01.2021'
+              />
+            </Route>
             <Route exact path='/posts/:id/edit' component={EditPost} />
           </Switch>
         </Container>
