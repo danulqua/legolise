@@ -56,7 +56,7 @@ const App = () => {
                 email='vasil@gmail.com'
                 bio='I love lego'
                 gender='male'
-                dateOfBirth='10.01.2021'
+                dateOfBirth='2021-12-12'
               />
             </Route>
             <Route exact path='/posts/:id/edit' component={EditPost} />

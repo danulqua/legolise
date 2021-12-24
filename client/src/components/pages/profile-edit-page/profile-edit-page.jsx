@@ -1,24 +1,33 @@
 import React, { Component, useState } from 'react';
 import './profile-edit-page.scss';
 
-const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth }) => {
+const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth, avatar }) => {
   const [userData, setUserData] = useState({
     username,
     email,
     bio,
     gender,
-    dateOfBirth
+    dateOfBirth,
+    avatar,
+    password: '',
+    passwordRepeat: ''
   });
 
   const handleInputChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
 
-    setUserData({ [name]: value });
+    setUserData((userData) => ({ ...userData, [name]: value }));
+    console.log(userData.dateOfBirth);
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    const { username, email, bio, gender, dateOfBirth, avatar, password, passwordRepeat } =
+      userData;
+
+    if (password !== passwordRepeat) return;
+
     console.log(userData);
   };
 
@@ -26,7 +35,7 @@ const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth }) => {
     <div className='edit-profile-wrapper'>
       <form onSubmit={handleFormSubmit}>
         <h2>Edit profile</h2>
-        <div className='edit-firstname input-wrapper'>
+        <div className='input-wrapper'>
           <label htmlFor='username'>Username: </label>
           <input
             id='username'
@@ -36,7 +45,17 @@ const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth }) => {
             onChange={handleInputChange}
           ></input>
         </div>
-        <div className='edit-firstname input-wrapper'>
+        <div className='input-wrapper'>
+          <label htmlFor='avatar'>Avatar: </label>
+          <input
+            id='avatar'
+            name='avatar'
+            type='file'
+            value={userData.avatar}
+            onChange={handleInputChange}
+          ></input>
+        </div>
+        <div className='input-wrapper'>
           <label htmlFor='dateOfBirth'>Date of birth: </label>
           <input
             id='dateOfBirth'
@@ -46,7 +65,7 @@ const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth }) => {
             onChange={handleInputChange}
           ></input>
         </div>
-        <div className='username-input input-wrapper'>
+        <div className='input-wrapper'>
           Gender:{' '}
           <label htmlFor='gender-male'>
             male{' '}
@@ -71,14 +90,19 @@ const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth }) => {
             ></input>
           </label>
         </div>
-        <div className='edit-avatar input-wrapper'>
+        <div className='input-wrapper'>
           <label htmlFor='bio'>Bio: </label>
-          <textarea name='bio' id='bio' cols='30' rows='10' onChange={handleInputChange}>
-            {userData.bio}
-          </textarea>
+          <textarea
+            name='bio'
+            id='bio'
+            cols='30'
+            rows='10'
+            value={userData.bio}
+            onChange={handleInputChange}
+          ></textarea>
         </div>
         <hr />
-        <div className='edit-lastname input-wrapper'>
+        <div className='input-wrapper'>
           <label htmlFor='email'>Email: </label>
           <input
             name='email'
@@ -87,7 +111,7 @@ const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth }) => {
             onChange={handleInputChange}
           ></input>
         </div>
-        <div className='edit-lastname input-wrapper'>
+        <div className='input-wrapper'>
           <label htmlFor='password'>Password: </label>
           <input
             id='password'
@@ -97,11 +121,11 @@ const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth }) => {
             onChange={handleInputChange}
           ></input>
         </div>
-        <div className='edit-lastname input-wrapper'>
+        <div className='input-wrapper'>
           <label htmlFor='password-repeat'>Repeat password: </label>
           <input
             id='password-repeat'
-            name='password-repeat'
+            name='passwordRepeat'
             type='password'
             value={userData.passwordRepeat}
             onChange={handleInputChange}

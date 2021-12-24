@@ -3,11 +3,6 @@ import { Link } from 'react-router-dom';
 import './profile-page.scss';
 import { Col, Row } from 'reactstrap';
 
-import ShortInfo from '../../profile-short-info';
-import Social from '../../profile-social';
-import FullInfo from '../../profile-full-info';
-import UserPosts from '../../profile-user-posts';
-import FriendList from '../../friend-list';
 import PostCard from '../../post-card/post-card.jsx';
 
 class ProfilePage extends Component {
