@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row } from 'reactstrap';
-import PostCard from '../post-card';
+import PostCard from '../post-card/post-card.jsx';
 import Spinner from '../spinner';
 
 import Service from '../../services/post-service';

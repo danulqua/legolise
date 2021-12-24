@@ -1,12 +1,12 @@
 import React from 'react';
 import './feed-page.scss';
 import SearchForm from '../../search-form';
-import PostList from '../../post-list';
+import PostList from '../../post-list/post-list.jsx';
 
 const FeedPage = () => {
   return (
     <div className='feed'>
-      <h1>Your feed</h1>
+      <h2>Your feed</h2>
       <SearchForm />
       <hr></hr>
       <PostList />

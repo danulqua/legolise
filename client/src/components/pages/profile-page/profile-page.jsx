@@ -7,6 +7,7 @@ import Social from '../../profile-social';
 import FullInfo from '../../profile-full-info';
 import UserPosts from '../../profile-user-posts';
 import FriendList from '../../friend-list';
+import PostCard from '../../post-card/post-card.jsx';
 
 class ProfilePage extends Component {
   render() {
@@ -43,6 +44,39 @@ class ProfilePage extends Component {
         </Row>
 
         {/* TODO: User's posts list */}
+        <div className='recent-posts'>
+          <h2>Recent posts by Vasil</h2>
+          <Row>
+            <PostCard
+              type={1}
+              id={1}
+              title='Star wars'
+              img='https://via.placeholder.com/400x300'
+              date='24.12.2021'
+            />
+            <PostCard
+              type={1}
+              id={1}
+              title='Star wars'
+              img='https://via.placeholder.com/400x300'
+              date='24.12.2021'
+            />
+            <PostCard
+              type={1}
+              id={1}
+              title='Star wars'
+              img='https://via.placeholder.com/400x300'
+              date='24.12.2021'
+            />
+            <PostCard
+              type={1}
+              id={1}
+              title='Star wars'
+              img='https://via.placeholder.com/400x300'
+              date='24.12.2021'
+            />
+          </Row>
+        </div>
 
         {/* <ul>
           <Row className='profile-row-container'>

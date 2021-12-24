@@ -1,0 +1,51 @@
+.post-card {
+  position: relative;
+  padding: 10px;
+  border: 1px solid #dfdfdf;
+  margin-bottom: 15px;
+  min-height: 300px;
+  height: calc(100% - 15px);
+}
+
+.post-img {
+  height: 250px;
+  overflow: hidden;
+}
+
+.post-img {
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s transform;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.post-card-details {
+  margin-top: 10px;
+
+  .title {
+    margin-top: 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .title:hover {
+    text-decoration: underline;
+  }
+
+  .author {
+    a {
+      color: black;
+
+      &:hover {
+        color: black;
+        text-decoration: underline;
+      }
+    }
+  }
+}

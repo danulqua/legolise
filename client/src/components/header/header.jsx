@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './header.css';
+import './header.scss';
 import { Container } from 'reactstrap';
 
 const Header = (props) => {
@@ -26,9 +26,9 @@ const Header = (props) => {
     <header className='header'>
       <Container>
         <div className='header-wrapper'>
-          <div className='header-brand'>
+          <h1 className='header-brand'>
             <Link to='/'>LegoLise</Link>
-          </div>
+          </h1>
           <nav className='nav'>
             <ul className='nav-list'>{links}</ul>
           </nav>

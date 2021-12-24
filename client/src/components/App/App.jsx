@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import './App.css';
-import Header from '../header';
+import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import {
   FeedPage,
