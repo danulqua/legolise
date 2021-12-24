@@ -1,125 +1,118 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import './profile-edit-page.scss';
 
-export default class EditProfile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      interests: '',
-      occupation: '',
-      about: '',
-      priceRange: '',
-      avatar: ''
-    };
-    this.handlerInput = this.handlerInput.bind(this);
-    this.finishEditing = this.finishEditing.bind(this);
-  }
+const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth }) => {
+  const [userData, setUserData] = useState({
+    username,
+    email,
+    bio,
+    gender,
+    dateOfBirth
+  });
 
-  handlerInput(event) {
-    event.preventDefault();
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    this.setState({
-      [name]: value
-    });
-  }
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
 
-  finishEditing() {
-    console.log(this.state);
-  }
+    setUserData({ [name]: value });
+  };
 
-  render() {
-    return (
-      <div className='edit-profile-menu'>
-        <form className='edit-profile-menu-container' method='PUT'>
-          <h1>Редагувати профіль</h1>
-          <div className='edit-firstname edit-page-row'>
-            <h4>Ім`я</h4>
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log(userData);
+  };
+
+  return (
+    <div className='edit-profile-wrapper'>
+      <form onSubmit={handleFormSubmit}>
+        <h2>Edit profile</h2>
+        <div className='edit-firstname input-wrapper'>
+          <label htmlFor='username'>Username: </label>
+          <input
+            id='username'
+            name='username'
+            type='text'
+            value={userData.username}
+            onChange={handleInputChange}
+          ></input>
+        </div>
+        <div className='edit-firstname input-wrapper'>
+          <label htmlFor='dateOfBirth'>Date of birth: </label>
+          <input
+            id='dateOfBirth'
+            name='dateOfBirth'
+            type='date'
+            value={userData.dateOfBirth}
+            onChange={handleInputChange}
+          ></input>
+        </div>
+        <div className='username-input input-wrapper'>
+          Gender:{' '}
+          <label htmlFor='gender-male'>
+            male{' '}
             <input
-              name='firstname'
-              type='text'
-              value={this.state.firstName}
-              onChange={this.handlerInput}
+              id='gender-male'
+              name='gender'
+              type='radio'
+              checked={userData.gender === 'male'}
+              value='male'
+              onChange={handleInputChange}
             ></input>
-          </div>
-          <div className='edit-lastname edit-page-row'>
-            <h4>Прізвище</h4>
+          </label>
+          <label htmlFor='gender-female'>
+            female{' '}
             <input
-              name='lastname'
-              type='text'
-              value={this.state.lastName}
-              onChange={this.handlerInput}
+              id='gender-female'
+              name='gender'
+              type='radio'
+              checked={userData.gender === 'female'}
+              value='female'
+              onChange={handleInputChange}
             ></input>
-          </div>
-          <div className='username-input edit-page-row'>
-            <h4>Ваш Username</h4>
-            <input
-              name='username'
-              type='text'
-              value={this.state.userName}
-              onChange={this.handlerInput}
-            ></input>
-          </div>
-          <hr></hr>
-          <div className='edit-avatar edit-page-row'>
-            <h4>Виберіть аватар</h4>
-            <input
-              name='avatar'
-              type='file'
-              value={this.state.avatar}
-              onChange={this.handlerInput}
-            ></input>
-            <img src={'/images/' + this.state.avatar}></img>
-          </div>
-          <hr></hr>
-          <div className='edit-occupation edit-page-row'>
-            <h4>Рід занять</h4>
-            <input
-              name='occupation'
-              placeholder='Введіть Ваш рід занять'
-              type='text'
-              value={this.state.occupation}
-              onChange={this.handlerInput}
-            ></input>
-          </div>
-          <div className='edit-about-input edit-page-row'>
-            <h4>Про Вас</h4>
-            <input
-              name='about'
-              placeholder='Розкажіть дещо про себе'
-              type='text'
-              value={this.state.about}
-              onChange={this.handlerInput}
-            ></input>
-          </div>
-          <div className='edit-roomates-preferences-input edit-page-row'>
-            <h4>Вподобання в сусідах</h4>
-            <input
-              name='rommatesPreferences'
-              placeholder='Розкажіть про Ваші вподобання в сусідах'
-              type='text'
-              value={this.state.roommatesPreferences}
-              onChange={this.handlerInput}
-            ></input>
-          </div>
-          <div className='price-input edit-page-row'>
-            <h4>Цінові вподобання</h4>
-            <input
-              name='priceRange'
-              placeholder='Розкажіть про Ваші цінові вподобання'
-              type='text'
-              value={this.state.priceRange}
-              onChange={this.handlerInput}
-            ></input>
-          </div>
-          <div className='submit-btn'>
-            <button className='btn-primary btn' type='reset' onClick={this.finishEditing}>
-              Зберегти
-            </button>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+          </label>
+        </div>
+        <div className='edit-avatar input-wrapper'>
+          <label htmlFor='bio'>Bio: </label>
+          <textarea name='bio' id='bio' cols='30' rows='10' onChange={handleInputChange}>
+            {userData.bio}
+          </textarea>
+        </div>
+        <hr />
+        <div className='edit-lastname input-wrapper'>
+          <label htmlFor='email'>Email: </label>
+          <input
+            name='email'
+            type='email'
+            value={userData.email}
+            onChange={handleInputChange}
+          ></input>
+        </div>
+        <div className='edit-lastname input-wrapper'>
+          <label htmlFor='password'>Password: </label>
+          <input
+            id='password'
+            name='password'
+            type='password'
+            value={userData.password}
+            onChange={handleInputChange}
+          ></input>
+        </div>
+        <div className='edit-lastname input-wrapper'>
+          <label htmlFor='password-repeat'>Repeat password: </label>
+          <input
+            id='password-repeat'
+            name='password-repeat'
+            type='password'
+            value={userData.passwordRepeat}
+            onChange={handleInputChange}
+          ></input>
+        </div>
+        <button className='btn-primary btn btn-submit' type='submit'>
+          Finish editing
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default ProfileEditPage;

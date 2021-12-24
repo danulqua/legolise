@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './profile-page.scss';
 import { Col, Row } from 'reactstrap';
 
@@ -19,16 +20,17 @@ class ProfilePage extends Component {
               <div className='avatar-wrapper'>
                 <img src='https://via.placeholder.com/150x150' alt='avatar' />
               </div>
-              <div className='user-name'>
-                Vasil Kozakov <span>@vasil4264</span>
-              </div>
+              <div className='user-name'>@vasil4264</div>
               <div className='date-registered'>Registered on 12.12.2012</div>
+              <Link to='/editProfile' className='btn btn-outline-secondary'>
+                Edit profile
+              </Link>
             </div>
           </Col>
           <Col md={8}>
             <div className='detail-info'>
               <div className='detail-info__item'>
-                <h2>About</h2>
+                <h2>Bio</h2>
                 <p>I love lego, so I have registered here to impress somebody else</p>
               </div>
               <div className='detail-info__item'>
