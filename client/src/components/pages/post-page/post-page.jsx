@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Service from '../../../services/post-service';
 
 import PostDetails from '../../post-details';
-import Spinner from '../../spinner';
+import Spinner from '../../spinner/spinner.jsx';
 
 const PostPage = (props) => {
   const [state, setState] = useState({

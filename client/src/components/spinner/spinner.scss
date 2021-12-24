@@ -6,8 +6,8 @@
   width: 100px;
   height: 100px;
   margin: auto;
-  border: 10px solid rgba(255, 209, 91, 0.3);
-  border-top-color: rgb(255, 209, 91);
+  border: 10px solid transparentize($color: #ffb3b3, $amount: 0.7%);
+  border-top-color: #ffb3b3;
   border-radius: 50%;
   animation: spinner 1s infinite linear;
 }

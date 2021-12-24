@@ -7,7 +7,7 @@ import './post-details.css';
 
 import PhotosPost from '../post-photos';
 import { formatDate } from '../../helpers';
-import BtnLike from '../btn-like';
+import BtnLike from '../btn-like/btn-like.jsx';
 
 const flatView = (props) => {
   const { title, description, district, address, ownerPhone, price, originLink, date, photos } =

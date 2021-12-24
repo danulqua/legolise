@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row } from 'reactstrap';
 import PostCard from '../post-card/post-card.jsx';
-import Spinner from '../spinner';
+import Spinner from '../spinner/spinner.jsx';
 
 import Service from '../../services/post-service';
 

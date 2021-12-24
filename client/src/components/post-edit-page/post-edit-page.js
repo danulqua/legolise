@@ -4,7 +4,7 @@ import React, { Component, useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import PostService from '../../services/post-service';
 import { EditPost } from '../pages';
-import Spinner from '../spinner';
+import Spinner from '../spinner/spinner.jsx';
 import './post-edit-page.css';
 
 // const flatView = () => {

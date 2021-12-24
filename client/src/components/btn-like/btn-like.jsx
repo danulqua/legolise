@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import './btn-like.css';
+import './btn-like.scss';
 
 export default class BtnLike extends Component {
   constructor(props) {

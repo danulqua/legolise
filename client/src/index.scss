@@ -112,16 +112,16 @@ button.button {
 }
 
 button.button.action {
-  background-color: #83b692;
+  background-color: #ffb3b3;
   transition: 0.3s background-color ease;
 }
 
 button.button.action:hover {
-  background-color: #799c83;
+  background-color: lighten($color: #ffb3b3, $amount: 5%);
 }
 
 button.button.action:active {
-  background-color: #649171;
+  background-color: darken($color: #ffb3b3, $amount: 5%);
 }
 
 .greet-container {
