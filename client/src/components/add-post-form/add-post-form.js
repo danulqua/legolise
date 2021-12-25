@@ -8,7 +8,7 @@ import './add-post-form.css';
 const AddPostForm = () => {
   const postService = new PostService();
   const history = useHistory();
-  const assets = ['2.png', '1.png', '3.jpg', '5.png', '6.jpg'];
+  const assets = ['2.png', '1.png', '3.jpg', '5.png', '6.jpg', '7.jpg', '8.jpg', '9.jpg'];
   const [state, setState] = useState({
     title: '',
     description: '',
