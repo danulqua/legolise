@@ -29,9 +29,24 @@ const userInterface = () => {
     return data;
   };
 
+  const getUserById = async (id) => {
+    const result = await Users.find({ _id: `${id}` }).exec();
+
+    if (!result[0]) {
+      return {
+        error: true,
+        message: "User not found",
+      };
+    }
+
+    const { ...data } = result[0];
+    return data;
+  };
+
   return {
     getUsers,
     getUserByUsername,
+    getUserById
   };
 };
 

@@ -1,8 +1,19 @@
 import { getData } from './requests';
+import LocalStorageService from '../helpers/storageService';
 
 export default class UserService {
   async getUserInfo() {
-    const result = await postData('http://localhost:4000/api/auth/register', body);
-    return result;
+    const token = LocalStorageService.getAccessToken();
+    const result = await fetch(`http://localhost:4000/api/users/me`, {
+      headers: {
+        Authorization: `${token}`
+      }
+    });
+    return await result.json();
+  }
+
+  async getUserInfoById(id) {
+    const result = await fetch(`http://localhost:4000/api/users/${id}`);
+    return await result.json();
   }
 }

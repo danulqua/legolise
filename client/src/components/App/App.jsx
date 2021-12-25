@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import './App.css';
@@ -15,17 +15,24 @@ import {
   EditPost
 } from '../pages';
 
+import AuthService from '../../services/auth-service';
+
 const App = () => {
-  const [authUser, setAuthUser] = useState(null);
+  const service = new AuthService();
+  const [authUser, setAuthUser] = useState(false);
 
-  const loginUser = (user) => setAuthUser({ authUser: { ...user } });
+  useEffect(() => {
+    if (service.checkAuth()) {
+      setAuthUser(true);
+    }
+  });
 
-  const logoutUser = () => setAuthUser({ authUser: null });
+  console.log(authUser);
 
   return (
     <>
       <Router>
-        <Header authUser={authUser} />
+        <Header authUser={authUser} loginUser={setAuthUser} />
         <Container>
           <Switch>
             <Route
@@ -42,7 +49,7 @@ const App = () => {
             <Route
               exact
               path='/login'
-              component={(props) => <Login loginUser={loginUser} {...props} />}
+              component={(props) => <Login loginUser={setAuthUser} {...props} />}
             />
             <Route exact path='/posts' component={FeedPage} />
             <Route exact path='/posts/add' component={NewPostPage} />

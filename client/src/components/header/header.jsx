@@ -3,8 +3,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './header.scss';
 import { Container } from 'reactstrap';
+import AuthService from '../../services/auth-service';
 
-const Header = ({ authUser }) => {
+const Header = ({ authUser, loginUser }) => {
+  const service = new AuthService();
+
+  const logOut = () => {
+    loginUser(false);
+    service.logout();
+  };
+
   const links = !authUser ? (
     <li className='nav-item'>
       <Link to='/login'>Sign in</Link>
@@ -19,6 +27,11 @@ const Header = ({ authUser }) => {
       </li>
       <li className='nav-item'>
         <Link to='/profile'>Profile</Link>
+      </li>
+      <li className='nav-item'>
+        <Link to='/' onClick={logOut}>
+          Logout
+        </Link>
       </li>
     </>
   );

@@ -1,12 +1,22 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Col } from 'reactstrap';
 import './post-card.scss';
 import { formatDate } from '../../helpers/index';
+import UserService from '../../services/user-service';
 
 const PostCard = ({ id, img, title, date, userId }) => {
-  console.log(img);
+  const userService = new UserService();
+  const [userName, setUsername] = useState('');
+
+  useEffect(() => {
+    userService.getUserInfoById(userId).then((res) => {
+      console.log(res._doc.username);
+      return setUsername(res._doc.username);
+    });
+  }, []);
+
   return (
     <Col sm={6} lg={4} xl={3}>
       <li className='post-card'>
@@ -21,7 +31,7 @@ const PostCard = ({ id, img, title, date, userId }) => {
           </div>
           <div>Created on {formatDate(date)}</div>
           <div className='author'>
-            Author: <Link to={`/users/${userId}`}>Vasil Kozakov</Link>
+            Author: <Link to={`/users/${userName}`}>{userName}</Link>
           </div>
         </div>
       </li>

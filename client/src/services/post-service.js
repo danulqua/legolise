@@ -6,7 +6,7 @@ export default class PostService {
   }
 
   async getPostById(id) {
-    return await getData(`http://127.0.0.1:4000/api/posts/${id}`);
+    return await getData(`http://localhost:4000/api/posts/${id}`);
   }
 
   async createPost(body) {

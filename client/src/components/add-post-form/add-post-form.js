@@ -1,20 +1,30 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PostService from '../../services/post-service';
 import { useHistory } from 'react-router-dom';
 import './add-post-form.css';
+import UserService from '../../services/user-service';
 
 const AddPostForm = () => {
   const postService = new PostService();
+  const userService = new UserService();
   const history = useHistory();
   const assets = ['2.png', '1.png', '3.jpg', '5.png', '6.jpg', '7.jpg', '8.jpg', '9.jpg'];
   const [state, setState] = useState({
     title: '',
     description: '',
     pictures: assets[Math.floor(Math.random() * assets.length)],
-    likes: []
+    likes: [],
+    createdBy: ''
   });
+  const [userId, setUser] = useState('');
+
+  useEffect(() => {
+    userService.getUserInfo().then((res) => {
+      return setUser(res._id);
+    });
+  }, []);
 
   const onInputChange = (event) => {
     const { name, value } = event.target;
@@ -26,8 +36,10 @@ const AddPostForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const body = state;
-    state.createdOn = new Date();
+    const body = { ...state };
+    body.createdOn = new Date();
+    body.createdBy = userId;
+    console.log(body);
     postService.createPost(body).then((data) => {
       history.replace(`/posts/${data._id}`);
     });

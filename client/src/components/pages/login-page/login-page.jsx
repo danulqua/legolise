@@ -28,7 +28,8 @@ const Login = (props) => {
     console.log(userData);
     authService.login(userData).then((data) => {
       if (!data.error) {
-        props.loginUser(data);
+        console.log(props);
+        props.loginUser(true);
         console.log(data);
         const storage = LocalStorageService;
         storage.setToken(data.token);
