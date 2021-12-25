@@ -51,7 +51,7 @@ const PostList = () => {
   ) : (
     state.posts.map((post) => {
       console.log(post);
-      const { _id, title, pictures, liked, createdOn } = post;
+      const { _id, title, pictures, liked, createdOn, createdBy } = post;
       return (
         <PostCard
           key={_id}
@@ -60,6 +60,7 @@ const PostList = () => {
           img={pictures[0]}
           liked={liked}
           date={createdOn}
+          userId={createdBy}
           onLike={() => onLike(_id)}
         />
       );

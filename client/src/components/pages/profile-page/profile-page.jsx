@@ -5,10 +5,23 @@ import { Col, Row } from 'reactstrap';
 
 import PostCard from '../../post-card/post-card.jsx';
 import PostService from '../../../services/post-service';
+import UserService from '../../../services/user-service';
 
 const ProfilePage = () => {
   const [posts, setPosts] = useState([]);
   const service = new PostService();
+  const userService = new UserService();
+  const [userData, setData] = useState({
+    res: {
+      bio: '',
+      username: '',
+      email: '',
+      password: '',
+      gender: '',
+      dateOfBirth: '',
+      createdOn: ''
+    }
+  });
 
   useEffect(() => {
     service.getAllPosts().then((res) => {
@@ -18,11 +31,29 @@ const ProfilePage = () => {
     });
   }, []);
 
+  useEffect(() => {
+    userService.getUserInfo().then((res) => {
+      console.log(res);
+      return setData((data) => ({
+        ...data,
+        res
+      }));
+    });
+  }, []);
+
   const content = posts.map((post) => {
     console.log(post);
-    const { _id, title, pictures, liked, createdOn } = post;
+    const { _id, title, pictures, liked, createdOn, createdBy } = post;
     return (
-      <PostCard key={_id} id={_id} title={title} img={pictures[0]} liked={liked} date={createdOn} />
+      <PostCard
+        key={_id}
+        id={_id}
+        title={title}
+        img={pictures[0]}
+        liked={liked}
+        date={createdOn}
+        userId={createdBy}
+      />
     );
   });
 
@@ -34,8 +65,8 @@ const ProfilePage = () => {
             <div className='avatar-wrapper'>
               <img src={process.env.PUBLIC_URL + 'avatar.jpg'} alt='avatar' />
             </div>
-            <div className='user-name'>@vasil4264</div>
-            <div className='date-registered'>Registered on 12.12.2012</div>
+            <div className='user-name'>{userData.res.username}</div>
+            <div className='date-registered'>Registered on {userData.res.createdOn}</div>
             <Link to='/editProfile' className='btn btn-outline-secondary'>
               Edit profile
             </Link>
@@ -45,15 +76,15 @@ const ProfilePage = () => {
           <div className='detail-info'>
             <div className='detail-info__item'>
               <h2>Bio</h2>
-              <p>I love lego, so I have registered here to impress somebody else</p>
+              <p>{userData.res.bio}</p>
             </div>
             <div className='detail-info__item'>
               <h2>Gender</h2>
-              <p>Male</p>
+              <p>{userData.res.gender}</p>
             </div>
             <div className='detail-info__item'>
               <h2>Date of birth</h2>
-              <p>01.02.1999</p>
+              <p>{userData.res.dateOfBirth}</p>
             </div>
           </div>
         </Col>
@@ -61,7 +92,7 @@ const ProfilePage = () => {
 
       {/* TODO: User's posts list */}
       <div className='recent-posts'>
-        <h2>Recent posts by Vasil</h2>
+        <h2>Recent posts by {userData.res.username}</h2>
         <Row>{content}</Row>
       </div>
     </div>

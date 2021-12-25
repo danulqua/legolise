@@ -13,7 +13,7 @@ const authRoutes = async (fastify) => {
     reply.send(result);
   });
 
-  fastify.post("/logout", async (request, reply) => {
+  fastify.get("/logout", async (request, reply) => {
     const result = await authService.logout(reply);
     reply.send(result);
   });

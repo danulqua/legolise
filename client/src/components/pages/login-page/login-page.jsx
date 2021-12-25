@@ -21,19 +21,18 @@ const Login = (props) => {
 
   const onLogin = (e) => {
     e.preventDefault();
-
     const userData = {
       email: email,
       password: password
     };
-
     console.log(userData);
-
     authService.login(userData).then((data) => {
       if (!data.error) {
-        props.loginUser(data);
+        console.log(props);
+        props.loginUser(true);
         console.log(data);
-        LocalStorageService.setToken(data.token);
+        const storage = LocalStorageService;
+        storage.setToken(data.token);
         return props.history.push('/');
       }
       console.log('error occured');
@@ -41,7 +40,7 @@ const Login = (props) => {
   };
 
   return (
-    <div className='login-wrapper'>
+    <div className='container-login-page'>
       <h2>Sign in to your account</h2>
       <div className='login-inputs'>
         <form method='POST'>
@@ -63,7 +62,7 @@ const Login = (props) => {
             onChange={handlerInput}
             required
           ></input>
-          <button className='btn btn-primary' type='submit' onClick={onLogin}>
+          <button className='btn btn-danger' type='submit' onClick={onLogin}>
             Sign in
           </button>
         </form>
