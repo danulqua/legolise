@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/prop-types */
 import React, { Component, useEffect, useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useParams } from 'react-router-dom';
 import PostService from '../../services/post-service';
 import { EditPost } from '../pages';
 import Spinner from '../spinner/spinner.jsx';
@@ -13,10 +13,12 @@ const EditPostForm = (props) => {
     error: false
   });
 
+  const { id } = useParams();
+
   const postService = new PostService();
 
   useEffect(() => {
-    postService.getPostById(props.match.params.id).then((data) => {
+    postService.getPostById(id).then((data) => {
       if (!data.error) {
         setState((state) => ({
           ...state,
@@ -31,7 +33,7 @@ const EditPostForm = (props) => {
         }));
       }
     });
-  });
+  }, []);
 
   const onInputChange = (e) => {
     const target = e.target;
@@ -78,6 +80,7 @@ const EditPostForm = (props) => {
       </div>
     );
   }
+
   return (
     <form id='add-post' method='PUT'>
       <div className='post-input-block'>
