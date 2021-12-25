@@ -4,6 +4,7 @@ import { Container } from 'reactstrap';
 import './App.css';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
+import ProtectedRoute from '../protected-route/protected-route.jsx';
 import {
   FeedPage,
   ProfilePage,
@@ -16,10 +17,9 @@ import {
 } from '../pages';
 
 const App = () => {
-  const [authUser, setAuthUser] = useState(null);
+  const [authUser, setAuthUser] = useState();
 
   const loginUser = (user) => setAuthUser({ authUser: { ...user } });
-
   const logoutUser = () => setAuthUser({ authUser: null });
 
   return (
@@ -45,12 +45,13 @@ const App = () => {
               component={(props) => <Login loginUser={loginUser} {...props} />}
             />
             <Route exact path='/posts' component={FeedPage} />
-            <Route exact path='/posts/add' component={NewPostPage} />
+            <ProtectedRoute exact path='/posts/add' component={NewPostPage} />
             <Route exact path='/posts/:id' component={PostPage} />
-            <Route exact path='/profile' component={ProfilePage} />
+            <ProtectedRoute exact path='/profile' component={ProfilePage} />
+            {/* <Route exact path='/profile' component={ProfilePage} /> */}
             <Route exact path='/register' component={SignUpMenu} />
             {/* <Route exact path='/editProfile' component={ProfileEditPage} /> */}
-            <Route exact path='/editProfile'>
+            <ProtectedRoute exact path='/editProfile'>
               <ProfileEditPage
                 username='vasil4242'
                 email='vasil@gmail.com'
@@ -58,8 +59,8 @@ const App = () => {
                 gender='male'
                 dateOfBirth='2021-12-12'
               />
-            </Route>
-            <Route exact path='/posts/:id/edit' component={EditPost} />
+            </ProtectedRoute>
+            <ProtectedRoute exact path='/posts/:id/edit' component={EditPost} />
           </Switch>
         </Container>
         <Footer />
