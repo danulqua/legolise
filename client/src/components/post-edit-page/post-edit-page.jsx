@@ -55,6 +55,8 @@ const EditPostForm = (props) => {
     e.preventDefault();
     const body = { ...state.data };
 
+    console.log(body);
+
     postService.editPost(body._id, body).then((data) => {
       history.replace(`/posts/${body._id}`);
     });

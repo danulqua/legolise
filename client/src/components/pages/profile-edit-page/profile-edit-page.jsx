@@ -1,7 +1,10 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import './profile-edit-page.scss';
+import UserService from '../../../services/user-service';
 
 const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth, avatar }) => {
+  const userService = new UserService();
+
   const [userData, setUserData] = useState({
     username,
     email,
@@ -13,20 +16,38 @@ const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth, avatar }) 
     passwordRepeat: ''
   });
 
+  const [userId, setId] = useState('');
+
+  useEffect(() => {
+    userService.getUserInfo().then((res) => {
+      const { _id, username, email, bio, gender } = res;
+      setId(_id);
+      setUserData((data) => ({
+        ...data,
+        username,
+        email,
+        bio,
+        gender
+      }));
+    });
+  }, []);
+
+  console.log(userId);
+
   const handleInputChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
 
     setUserData((userData) => ({ ...userData, [name]: value }));
-    console.log(userData.dateOfBirth);
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const { username, email, bio, gender, dateOfBirth, avatar, password, passwordRepeat } =
-      userData;
+    const { username, email, bio, gender, avatar, password, passwordRepeat } = userData;
 
     if (password !== passwordRepeat) return;
+
+    userService.updateUserInfo(userId, userData);
 
     console.log(userData);
   };
@@ -56,16 +77,6 @@ const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth, avatar }) 
           ></input>
         </div>
         <div className='input-wrapper'>
-          <label htmlFor='dateOfBirth'>Date of birth: </label>
-          <input
-            id='dateOfBirth'
-            name='dateOfBirth'
-            type='date'
-            value={userData.dateOfBirth}
-            onChange={handleInputChange}
-          ></input>
-        </div>
-        <div className='input-wrapper'>
           Gender:{' '}
           <label htmlFor='gender-male'>
             male{' '}
@@ -73,7 +84,7 @@ const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth, avatar }) 
               id='gender-male'
               name='gender'
               type='radio'
-              checked={userData.gender === 'male'}
+              checked={userData.gender === 'm'}
               value='male'
               onChange={handleInputChange}
             ></input>
@@ -84,7 +95,7 @@ const ProfileEditPage = ({ username, email, bio, gender, dateOfBirth, avatar }) 
               id='gender-female'
               name='gender'
               type='radio'
-              checked={userData.gender === 'female'}
+              checked={userData.gender === 'f'}
               value='female'
               onChange={handleInputChange}
             ></input>

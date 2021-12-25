@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-const Posts = require('../models/Posts');
+const Posts = require("../models/Posts");
 
 const postInterface = () => {
   const getAllPosts = async () => {
@@ -21,6 +21,7 @@ const postInterface = () => {
 
   const editPost = async (body) => {
     const { _id, title, description, pictures, likes } = body;
+    console.log(body);
     const post = await Posts.findOne({ _id });
     const update = {
       title: title,

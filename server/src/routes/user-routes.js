@@ -19,6 +19,14 @@ async function routes(fastify, options) {
     const result = await userAccess.getUserById(request.params.id);
     reply.send(result);
   });
+
+  fastify.put("/:id/edit", async (request, reply) => {
+    const result = await userAccess.updateUserById(
+      request.params.id,
+      request.body
+    );
+    reply.send(result);
+  });
 }
 
 module.exports = routes;

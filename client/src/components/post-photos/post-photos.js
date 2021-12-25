@@ -32,7 +32,7 @@ export default class PhotosPost extends Component {
     const { current } = this.state;
     return (
       <div className='photos'>
-        <h2>Фотографії</h2>
+        <h2>Photo</h2>
         <div className='slider'>
           <i className='fas fa-arrow-alt-circle-left left-arrow' onClick={this.prevSlide}></i>
           {photos.map((photo, index) => {

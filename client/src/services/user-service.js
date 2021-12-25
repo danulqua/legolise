@@ -1,4 +1,4 @@
-import { getData } from './requests';
+import { editData } from './requests';
 import LocalStorageService from '../helpers/storageService';
 
 export default class UserService {
@@ -15,5 +15,9 @@ export default class UserService {
   async getUserInfoById(id) {
     const result = await fetch(`http://localhost:4000/api/users/${id}`);
     return await result.json();
+  }
+
+  async updateUserInfo(id, body) {
+    return await editData(`http://localhost:4000/api/users/${id}/edit`, body);
   }
 }

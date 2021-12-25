@@ -43,10 +43,43 @@ const userInterface = () => {
     return data;
   };
 
+  const updateUserById = async (id, body) => {
+    const { username, bio, gender, password } = body;
+    let userUpdate;
+    if (password) {
+      userUpdate = {
+        username: username,
+        bio: bio,
+        gender: gender,
+        password: password,
+      };
+    } else {
+      userUpdate = {
+        username: username,
+        bio: bio,
+        gender: gender,
+      };
+    }
+    const result = await Users.updateOne({ _id: id }, userUpdate);
+
+    console.log(result);
+
+    if (!result[0]) {
+      return {
+        error: true,
+        message: "User not found",
+      };
+    }
+
+    const { ...data } = result[0];
+    return data;
+  };
+
   return {
     getUsers,
     getUserByUsername,
     getUserById,
+    updateUserById,
   };
 };
 

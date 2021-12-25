@@ -79,10 +79,6 @@ const ProfilePage = () => {
               <p>{userData.res.bio}</p>
             </div>
             <div className='detail-info__item'>
-              <h2>Gender</h2>
-              <p>{userData.res.gender}</p>
-            </div>
-            <div className='detail-info__item'>
               <h2>Date of birth</h2>
               <p>{userData.res.dateOfBirth}</p>
             </div>

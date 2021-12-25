@@ -11,9 +11,9 @@ const PostCard = ({ id, img, title, date, userId }) => {
   const [userName, setUsername] = useState('');
 
   useEffect(() => {
-    userService.getUserInfoById(userId).then((res) => {
-      console.log(res._doc.username);
-      return setUsername(res._doc.username);
+    userService.getUserInfoById(userId).then((obj) => {
+      console.log(obj);
+      return setUsername(obj._doc.username);
     });
   }, []);
 

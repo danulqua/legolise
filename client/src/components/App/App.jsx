@@ -55,17 +55,9 @@ const App = () => {
             <ProtectedRoute exact path='/posts/add' component={NewPostPage} />
             <Route exact path='/posts/:id' component={PostPage} />
             <ProtectedRoute exact path='/profile' component={ProfilePage} />
-            {/* <Route exact path='/profile' component={ProfilePage} /> */}
             <Route exact path='/register' component={SignUpMenu} />
-            {/* <Route exact path='/editProfile' component={ProfileEditPage} /> */}
             <ProtectedRoute exact path='/editProfile'>
-              <ProfileEditPage
-                username='vasil4242'
-                email='vasil@gmail.com'
-                bio='I love lego'
-                gender='male'
-                dateOfBirth='2021-12-12'
-              />
+              <ProfileEditPage />
             </ProtectedRoute>
             <ProtectedRoute exact path='/posts/:id/edit' component={EditPost} />
           </Switch>

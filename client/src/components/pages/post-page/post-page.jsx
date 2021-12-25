@@ -54,7 +54,6 @@ const PostPage = () => {
     );
   }
 
-  /* add button and user */
   return (
     <div className='post-wrapper'>
       <h2>Post Page</h2>
