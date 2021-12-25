@@ -25,7 +25,7 @@ const PostPage = () => {
       if (!data.error) {
         setState((state) => ({
           ...state,
-          ...data,
+          data: { ...data['0'] },
           loading: false
         }));
       } else {
@@ -46,25 +46,40 @@ const PostPage = () => {
       </div>
     );
   }
-  console.log(state['0']._id);
+  console.log(state.data._id);
+
   /* add button and user */
   return (
     <div className='post-wrapper'>
       <h2>Post Page</h2>
       <Row>
         <Col md={4}>
-          <div className='left-side-pics'>
+          <div className='left-side'>
             <div className='post-img'>
-              <img src={state['0'].pictures}></img>
+              <img src={state.data.pictures}></img>
             </div>
-            <li>Number of likes {state['0'].likes.length}</li>
+            <div className='likes-count'>
+              Likes: <span>{state.data.likes.length}</span>
+            </div>
+            <div className='author'>
+              Author: <Link to={`/users/${state.data.createdBy}`}>author</Link>
+            </div>
           </div>
         </Col>
         <Col md={8}>
-          <div className='right-side-text'>
-            <li>Title {state['0'].title}</li>
-            <li>Description : {state['0'].description}</li>
-            <li>Created on{formatDate(state['0'].createdOn)}</li>
+          <div className='right-side'>
+            <div className='detail-item'>
+              <div className='detail-item__header'>Title: </div>
+              <div className='detail-item__info'>{state.data.title}</div>
+            </div>
+            <div className='detail-item'>
+              <div className='detail-item__header'>Description: </div>
+              <div className='detail-item__info'>{state.data.description}</div>
+            </div>
+            <div className='detail-item'>
+              <div className='detail-item__header'>Updated on: </div>
+              <div className='detail-item__info'>{state.data.createdOn}</div>
+            </div>
           </div>
         </Col>
       </Row>

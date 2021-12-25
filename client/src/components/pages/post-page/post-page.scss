@@ -10,4 +10,26 @@
     font-size: 20px;
     font-weight: bold;
   }
+
+  .left-side {
+    .likes-count {
+      font-size: 1.1rem;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .right-side {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .detail-item {
+      &__header {
+        font-size: 20px;
+      }
+    }
+  }
 }
