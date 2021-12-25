@@ -1,11 +1,17 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Service from '../../../services/post-service';
-
-import PostDetails from '../../post-details';
+import { Link } from 'react-router-dom';
 import Spinner from '../../spinner/spinner.jsx';
+import './post-page.scss';
+import { formatDate } from '../../../helpers';
+import BtnLike from '../../btn-like/btn-like.jsx';
 
-const PostPage = (props) => {
+const PostPage = () => {
+  const params = useParams();
+  const postID = params.id;
+  console.log(postID);
   const [state, setState] = useState({
     loading: true,
     error: false
@@ -13,10 +19,12 @@ const PostPage = (props) => {
   const service = new Service();
 
   useEffect(() => {
-    service.getPostById(props.match.params.id).then((data) => {
+    console.log(service.getPostById(postID));
+    service.getPostById(postID).then((data) => {
       if (!data.error) {
         setState((state) => ({
           ...state,
+          ...data,
           loading: false
         }));
       } else {
@@ -37,43 +45,25 @@ const PostPage = (props) => {
       </div>
     );
   }
-
-  const {
-    postId,
-    type,
-    title,
-    description,
-    district,
-    address,
-    ownerPhone,
-    price,
-    originLink,
-    date
-  } = state;
-
+  console.log(state['0']._id);
+  /* add button and user */
   return (
-    <PostDetails
-      postId={postId}
-      type={type}
-      title={title}
-      description={description}
-      district={district}
-      address={address}
-      ownerPhone={ownerPhone}
-      price={price}
-      originLink={originLink}
-      date={date}
-      involvedUsers={[
-        { id: 'asadd', avatar: 'avatar2.png', username: 'zirael' },
-        { id: 'asdscadd', avatar: 'avatar2.png', username: 'leaf' },
-        { id: 'asbnbfadd', avatar: 'avatar2.png', username: 'reaper' }
-      ]}
-      photos={[
-        { id: 'adosddjia', src: '/images/1.jpg' },
-        { id: 'asdscadgngnd', src: '/images/2.jpg' },
-        { id: 'asbnbfadsdad', src: '/images/3.jpg' }
-      ]}
-    />
+    <div className='post-box'>
+      <div className='post-page'>
+        <h2>Post Page</h2>
+      </div>
+      <div className='right-side-text'>
+        <li>Title {state['0'].title}</li>
+        <li>Description : {state['0'].description}</li>
+        <li>Created on{formatDate(state['0'].createdOn)}</li>
+      </div>
+      <div className='left-side-pics'>
+        <div className='post-img'>
+          <img src={state['0'].pictures}></img>
+        </div>
+        <li>Number of likes {state['0'].likes.length}</li>
+      </div>
+    </div>
   );
 };
 

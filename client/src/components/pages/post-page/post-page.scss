@@ -1,0 +1,36 @@
+h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 2rem;
+    position: relative;
+  }
+
+.title {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: bold;
+    
+  }
+
+.post-box{
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  border:1px solid gray;
+  height: 32vw;
+
+}
+
+.left-side-pics {
+    float:left;
+
+}
+
+.right-side-text {
+    float:right;
+    
+}
+
+
