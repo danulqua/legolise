@@ -25,7 +25,7 @@ const Login = (props) => {
       email: email,
       password: password
     };
-    console.log(userData);
+
     authService.login(userData).then((data) => {
       if (!data.error) {
         console.log(props);
@@ -40,7 +40,7 @@ const Login = (props) => {
   };
 
   return (
-    <div className='container-login-page'>
+    <div className='login-wrapper'>
       <h2>Sign in to your account</h2>
       <div className='login-inputs'>
         <form method='POST'>

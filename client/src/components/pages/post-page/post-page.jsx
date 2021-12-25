@@ -1,33 +1,40 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Service from '../../../services/post-service';
+import PostService from '../../../services/post-service';
 import { Link } from 'react-router-dom';
 import Spinner from '../../spinner/spinner.jsx';
 import './post-page.scss';
 import { formatDate } from '../../../helpers';
 import BtnLike from '../../btn-like/btn-like.jsx';
 import { Row, Col } from 'reactstrap';
+import UserService from '../../../services/user-service';
 
 const PostPage = () => {
   const params = useParams();
-  const postID = params.id;
-  console.log(postID);
+
   const [state, setState] = useState({
     loading: true,
     error: false
   });
-  const service = new Service();
+  const postService = new PostService();
+  const userService = new UserService();
 
   useEffect(() => {
-    console.log(service.getPostById(postID));
-    service.getPostById(postID).then((data) => {
+    postService.getPostById(params.id).then((data) => {
       if (!data.error) {
-        setState((state) => ({
-          ...state,
-          data: { ...data['0'] },
-          loading: false
-        }));
+        userService.getUserInfoById(data['0'].createdBy).then((userData) => {
+          if (!userData.error) {
+            setState((state) => ({
+              ...state,
+              data: {
+                ...data['0'],
+                createdBy: { ...userData._doc }
+              },
+              loading: false
+            }));
+          }
+        });
       } else {
         setState((state) => ({
           ...state,
@@ -46,7 +53,6 @@ const PostPage = () => {
       </div>
     );
   }
-  console.log(state.data._id);
 
   /* add button and user */
   return (
@@ -56,14 +62,18 @@ const PostPage = () => {
         <Col md={4}>
           <div className='left-side'>
             <div className='post-img'>
-              <img src={state.data.pictures}></img>
+              <img src={`${process.env.PUBLIC_URL}/${state.data.pictures[0]}`}></img>
             </div>
             <div className='likes-count'>
               Likes: <span>{state.data.likes.length}</span>
             </div>
             <div className='author'>
-              Author: <Link to={`/users/${state.data.createdBy}`}>author</Link>
+              Author:{' '}
+              <Link to={`/users/${state.data.createdBy._id}`}>{state.data.createdBy.username}</Link>
             </div>
+            <Link className='btn btn-secondary' to={`/posts/${state.data._id}/edit`}>
+              Edit post
+            </Link>
           </div>
         </Col>
         <Col md={8}>
@@ -78,7 +88,7 @@ const PostPage = () => {
             </div>
             <div className='detail-item'>
               <div className='detail-item__header'>Updated on: </div>
-              <div className='detail-item__info'>{state.data.createdOn}</div>
+              <div className='detail-item__info'>{formatDate(state.data.createdOn)}</div>
             </div>
           </div>
         </Col>
