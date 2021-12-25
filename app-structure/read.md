@@ -1,6 +1,6 @@
 # App Architecture
 ## ER Diagram
-![DB-diagram](legolise-db-diagram.png)
+![DB-diagram](legolise-db-diagram.PNG)
 
 ## Component Diagram
 ![component-diagram](legolise-component-diagram.png)
