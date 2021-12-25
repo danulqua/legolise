@@ -46,7 +46,7 @@ const userInterface = () => {
   return {
     getUsers,
     getUserByUsername,
-    getUserById
+    getUserById,
   };
 };
 

@@ -97,14 +97,14 @@ const authService = (fastify) => {
     const data = fastify.jwt.verify(token, process.env.JWT_ACCESS_SECRET);
     const candidate = await Users.find({ _id: `${data.id}` }).exec();
     return candidate[0];
-  }
+  };
 
   return {
     register,
     login,
     logout,
     authHook,
-    getInfoHook
+    getInfoHook,
   };
 };
 

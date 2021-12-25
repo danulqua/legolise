@@ -1,4 +1,5 @@
 import { getData } from './requests';
+import LocalStorageService from '../helpers/storageService';
 
 export default class UserService {
   async getUserInfo() {
